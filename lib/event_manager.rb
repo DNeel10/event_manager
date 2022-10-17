@@ -105,22 +105,15 @@ contents.each do |row|
   name = row[:first_name]
 
   zipcode = clean_zipcodes(row[:zipcode])
-
   phone_number = clean_phone_numbers(row[:homephone])
-
   reg_date = clean_registration_dates(row[:regdate])
   reg_day = get_day_of_week(row[:regdate])
   peak_time = find_peak_registration_times(peak_times, reg_date)
   peak_day = find_peak_reg_day(peak_days, reg_day)
-
   legislators = legislators_by_zipcode(zipcode)
-
   form_letter = erb_template.result(binding)
 
   save_thank_you_letter(id, form_letter)
-
-  puts "#{name} #{phone_number} #{reg_date}"
 end
 
 puts best_days_and_hours(peak_times, peak_days)
-
